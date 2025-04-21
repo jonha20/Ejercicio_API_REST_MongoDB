@@ -1,5 +1,6 @@
-const mongoose = require('mongoose');
-require('../config/db_mongo') // Conexión a BBDD MongoDB
+const mongoose = require("mongoose");
+const Provider = require("./provider.model");
+require("../config/db_mongo"); // Conexión a BBDD MongoDB
 
 const objectSchema = {
     id: { 
