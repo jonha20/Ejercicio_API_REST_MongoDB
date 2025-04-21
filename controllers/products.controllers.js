@@ -14,8 +14,22 @@ const getProduct = async (req, res) => {
     }
   };
 
-  
+  // CREATE
+const createProduct = async (req, res) => {
+  console.log(req.body);
+
+  try {
+    const data = req.body;
+    let answer = await new Product(data).save();
+    res.status(201).json(answer);
+  } catch (error) {
+    console.log(`ERROR: ${error.stack}`);
+    res.status(400).json({ msj: `ERROR: ${error.stack}` });
+  }
+};
+
 module.exports = {
     getProduct,
+    createProduct
   };
   
