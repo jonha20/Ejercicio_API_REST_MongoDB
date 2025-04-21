@@ -1,7 +1,8 @@
 const productsController = require('../controllers/products.controllers');
 const router = require('express').Router();
 
-router.get("/:id?", productsController.getProduct);
+router.get("/", productsController.getProduct);
 router.post("/", productsController.createProduct);
+router.delete("/", productsController.deleteProduct);
 
 module.exports = router;
