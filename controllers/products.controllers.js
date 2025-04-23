@@ -7,7 +7,7 @@ const getProduct = async (req, res) => {
       "provider",
       "-_id -__v"
     );
-    res.status(200).json(products); // Respuesta de la API para 1 producto o todos
+    res.status(200).json(products); 
   } catch (error) {
     console.log(`ERROR: ${error.stack}`);
     res.status(400).json({ msj: `ERROR: ${error.stack}` });
@@ -33,11 +33,22 @@ const updateProduct = async (req, res) => {
   console.log(req.body);
   try {
     const data = req.body;
+
     let answer = await Product.findOneAndUpdate(
-      {title: data.old_title},
-      data,
+      { title: data.old_title }, // Usar old_title como identificador
+      {
+        title: data.title,
+        price: data.price,
+        description: data.description,
+        provider: data.provider, 
+      },
       { new: true }
     );
+
+    if (!answer) {
+      return res.status(404).json({ msj: "Product not found" });
+    }
+
     res.status(200).json(answer);
   } catch (error) {
     console.log(`ERROR: ${error.stack}`);

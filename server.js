@@ -4,11 +4,11 @@ const app = express();
 const port = 3001;
 
 // // Importar middlewares
-// const manage404 = require("./middlewares/error404");
-// const morgan = require("./middlewares/morgan");
+const manage404 = require("./middlewares/error404");
+const morgan = require("./middlewares/morgan");
 
-// // Logger
-// app.use(morgan(':method :host :status :param[id] - :response-time ms :body'));
+// Logger
+app.use(morgan(':method :host :status :param[id] - :response-time ms :body'));
 
 // // Rutas
 const productsRoutes = require("./routes/products.routes");
@@ -26,8 +26,9 @@ app.use(express.json()); // Habilito recepción de JSON en servidor
 app.use("/api/products", productsRoutes);
 app.use("/api/providers", providersRoutes);
 
-// // Para rutas no existentes
-// app.use('*',error404);
+
+app.use(manage404); // Middleware gestiona error 404
+app.use("*",manage404);
 
 app.listen(port, () => {
   console.log(

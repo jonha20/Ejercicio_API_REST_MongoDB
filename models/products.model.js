@@ -48,12 +48,13 @@ async function createProduct(id, title, price, description) {
   console.log(result);
 }
 
-async function updateProduct(title, price, description, old_title) {
+async function updateProduct(title, price, description,provider, old_title ) {
   const product = await Product.findOne({ title: title });
   if (product) {
     product.title = title;
     product.price = price;
     product.description = description;
+    product.provider = provider;
     product.old_title = old_title;
     const result = await product.save();
     console.log("Se ha actualizado: " + result);
