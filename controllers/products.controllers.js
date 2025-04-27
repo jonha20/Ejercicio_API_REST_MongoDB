@@ -36,12 +36,7 @@ const updateProduct = async (req, res) => {
 
     let answer = await Product.findOneAndUpdate(
       { title: data.old_title }, // Usar old_title como identificador
-      {
-        title: data.title,
-        price: data.price,
-        description: data.description,
-        provider: data.provider, 
-      },
+      data,
       { new: true }
     );
 

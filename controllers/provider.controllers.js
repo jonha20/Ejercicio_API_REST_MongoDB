@@ -35,7 +35,7 @@ const updateProvider = async (req, res) => {
   try {
     const data = req.body;
     let answer = await Provider.findOneAndUpdate(
-      { companyName: data.companyName },
+      { companyName: data.old_companyName }, 
       data,
       { new: true }
     );

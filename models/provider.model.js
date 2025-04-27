@@ -51,12 +51,14 @@ async function createProvider(companyName, cif, address, url_web) {
   console.log("Se ha creado: " + result);
 }
 
-async function updateProvider(companyName, cif, address, url_web) {
+async function updateProvider(companyName, cif, address, url_web ,old_companyName) {
   const provider = await Provider.findOne({ companyName: companyName });
   if (provider) {
+    provider.companyName = companyName;
     provider.cif = cif;
     provider.address = address;
     provider.url_web = url_web;
+    provider.old_companyName = old_companyName;
     const result = await provider.save();
     console.log("Se ha actualizado: " + result);
   } else {
